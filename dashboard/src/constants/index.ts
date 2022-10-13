@@ -1,0 +1,1 @@
+export const AppTitle = "Task Board";
