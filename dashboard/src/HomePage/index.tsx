@@ -7,7 +7,7 @@ export const HomePage = () => {
   return (
     <div>
       <AppHeader />
-      <div className="container-flexbox m-3">
+      <div className="container-flexbox m-1">
         {
           statusOfTask.map((status) => (
             <Status key={status} status={status} />
