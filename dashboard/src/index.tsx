@@ -4,6 +4,8 @@ import React from'react';
 import ReactDOM from 'react-dom/client';
 import { HomePage } from './HomePage';
 import reportWebVitals from './reportWebVitals';
+import "./index.css";
+import "./App.css"
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

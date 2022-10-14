@@ -1,5 +1,4 @@
 import React from "react";
-import "../App.css";
 
 interface TitleProps {
     name: string;
@@ -7,8 +6,8 @@ interface TitleProps {
 
 function Title({ name }: TitleProps) {
     return (
-        <div className="dark-grey-text text-center">
-            <strong>
+        <div className="p-2">
+            <strong className="dark-grey-text">
                 {name.toUpperCase()}
             </strong>
         </div>

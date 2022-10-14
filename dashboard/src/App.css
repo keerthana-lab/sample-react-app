@@ -5,3 +5,16 @@
 .grey-bg {
     background-color: rgb(199, 199, 199);
 }
+
+.status-card {
+    flex: 1 0 20%;
+    margin: 10px;
+}
+
+.container-flexbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+    height: calc(100vh - 100px);
+}

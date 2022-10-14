@@ -1,6 +1,5 @@
 import React from "react";
 import Title from "./title";
-import "../App.css";
 
 interface StatusProps {
     status: string;
@@ -8,7 +7,7 @@ interface StatusProps {
 
 function Status({ status }:StatusProps) {
     return (
-        <div className="col-3 grey-bg">
+        <div className="grey-bg status-card p-2">
             <Title name = {status} />
         </div>
     );
