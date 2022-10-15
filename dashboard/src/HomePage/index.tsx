@@ -1,9 +1,9 @@
 import React from "react";
 import AppHeader from "../AppHeader";
+import { statusOfTask } from "../constants";
 import Status from "../Status";
 
 export const HomePage = () => {
-  const statusOfTask = ['To Do', 'In Progress', 'In Review', 'Done'];
   return (
     <div>
       <AppHeader />
