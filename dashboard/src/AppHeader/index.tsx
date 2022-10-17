@@ -24,7 +24,7 @@ function AppHeader({setFormInputs}: AppHeaderProps) {
     
       const handleSubmit = (event) => {
         event.preventDefault();
-        alert(JSON.stringify(formInputs));
+        setShow(false);
       }
     return (
         <div className="d-flex justify-content-between align-items-center m-3">

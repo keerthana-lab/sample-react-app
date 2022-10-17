@@ -6,6 +6,10 @@
     background-color: rgb(199, 199, 199);
 }
 
+.light-blue-bg {
+    background-color: rgb(162, 210, 222);
+}
+
 .status-card {
     flex: 1 0 20%;
     margin: 10px;
