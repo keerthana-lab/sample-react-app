@@ -1,12 +1,16 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import AppHeader from "../AppHeader";
-import { statusOfTask } from "../constants";
+import { defaultValue, statusOfTask } from "../constants";
 import Status from "../Status";
 
+export const TaskContext = createContext(defaultValue);
+
 export const HomePage = () => {
+  const [formInputs, setFormInputs] = useState(defaultValue);
+
   return (
-    <div>
-      <AppHeader />
+    <TaskContext.Provider value={ formInputs }>
+      <AppHeader setFormInputs={setFormInputs} />
       <div className="container-flexbox m-1">
         {
           statusOfTask.map((status) => (
@@ -14,6 +18,6 @@ export const HomePage = () => {
           ))
         }
       </div>
-    </div>
+    </TaskContext.Provider>
   );
 }
