@@ -36,17 +36,17 @@ function AppHeader({setFormInputs}: AppHeaderProps) {
                 </Modal.Header>
                 <Modal.Body>
                     <form onSubmit={handleSubmit}>
-                        <label>
-                            Enter Task Name:
-                            <input type="text" name="taskName" value={formInputs.taskName} onChange={handleChange} />
+                        <label className="d-flex mb-3">
+                            <div className="w-50">Enter Task Name:</div>
+                            <input type="text" className="w-50" name="taskName" value={formInputs.taskName} onChange={handleChange} />
                         </label>
-                        <label>
-                            Enter Task Description:
-                            <textarea name="taskDesc" value={formInputs.taskDesc} onChange={handleChange} />
+                        <label className="d-flex mb-3">
+                        <div className="w-50">Enter Task Description:</div>
+                            <textarea name="taskDesc" className="w-50" value={formInputs.taskDesc} onChange={handleChange} />
                         </label>
-                        <label>
-                            Enter Task Status:
-                        <select name="taskStatus" value={formInputs.taskStatus} onChange={handleChange}>
+                        <label className="d-flex mb-3">
+                        <div className="w-50">Enter Task Status:</div>
+                        <select name="taskStatus" className="w-50" value={formInputs.taskStatus} onChange={handleChange}>
                             {
                                 statusOfTask.map((status) => (
                                     <option key={status} value={status}>{status}</option>
