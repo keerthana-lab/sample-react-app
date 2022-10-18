@@ -1,20 +1,22 @@
-import React, { useContext, useState } from "react";
-import { AppTitle, closeButton, createTicketLabel, newTask, saveButton, statusOfTask } from "../constants";
+import React, { useState } from "react";
+import { AppTitle, closeButton, createTicketLabel, defaultValue, newTask, saveButton, statusOfTask } from "../constants";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { TaskContext } from "../HomePage";
+import { TicketType } from "../Status/types";
+
+
+const tickets: TicketType[] = [];
 
 interface AppHeaderProps {
-    setFormInputs: (values: any) => void;
+    getTicketDetails: (ticket:TicketType[]) => void;
 }
 
-function AppHeader({setFormInputs}: AppHeaderProps) {
+function AppHeader({getTicketDetails}:AppHeaderProps) {
     const [show, setShow] = useState(false);
+    const [formInputs, setFormInputs] = useState(defaultValue);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    const formInputs = useContext(TaskContext);
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -25,6 +27,8 @@ function AppHeader({setFormInputs}: AppHeaderProps) {
       const handleSubmit = (event) => {
         event.preventDefault();
         setShow(false);
+        tickets.push({...formInputs});
+        getTicketDetails(tickets);
       }
     return (
         <div className="d-flex justify-content-between align-items-center m-3">

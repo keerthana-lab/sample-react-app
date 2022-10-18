@@ -3,17 +3,17 @@ import AppHeader from "../AppHeader";
 import { defaultValue, statusOfTask } from "../constants";
 import Status from "../Status";
 
-export const TaskContext = createContext(defaultValue);
+export const TaskContext = createContext([defaultValue])
 
 export const HomePage = () => {
-  const [formInputs, setFormInputs] = useState(defaultValue);
-
+  const [ticketDetails, setTicketDetails] = useState([defaultValue]);
+  
   return (
-    <TaskContext.Provider value={ formInputs }>
-      <AppHeader setFormInputs={setFormInputs} />
+    <TaskContext.Provider value={ticketDetails}>
+      <AppHeader getTicketDetails={(tickets) => setTicketDetails([...tickets])} />
       <div className="container-flexbox m-1">
         {
-          statusOfTask.map((status) => (
+           statusOfTask.map((status) => (
             <Status key={status} status={status} />
           ))
         }

@@ -8,14 +8,15 @@ interface StatusProps {
 }
 
 function Status({ status }: StatusProps) {
-    const inputs = useContext(TaskContext);
-
+    const ticketDetails = useContext(TaskContext);
     return (
         <div className="grey-bg rounded status-card p-2">
             <Title name={status} />
             {
-                inputs.taskName && inputs.taskDesc && inputs.taskStatus === status ?
-                    <Ticket ticket={inputs} /> : null
+                 ticketDetails.map((t) => (
+                    t.taskName && t.taskDesc && t.taskStatus === status &&
+                    <Ticket ticket={t} key={t.taskName} /> 
+                ))
             }
         </div>
     );

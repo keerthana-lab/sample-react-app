@@ -7,7 +7,7 @@ interface TicketProps {
 
 function Ticket({ ticket }: TicketProps) {
     return (
-        <div className="light-blue-bg border border-secondary rounded p-2">
+        <div className="light-blue-bg border border-secondary rounded p-2 mb-3">
             <div>
                 <div className="d-flex">
                     <strong className="dark-grey-text w-25">Name:</strong>
