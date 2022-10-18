@@ -29,6 +29,7 @@ function AppHeader({getTicketDetails}:AppHeaderProps) {
         setShow(false);
         tickets.push({...formInputs});
         getTicketDetails(tickets);
+        setFormInputs(defaultValue);
       }
     return (
         <div className="d-flex justify-content-between align-items-center m-3">

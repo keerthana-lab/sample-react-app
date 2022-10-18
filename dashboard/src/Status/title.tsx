@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface TitleProps {
     name: string;
@@ -7,9 +8,11 @@ interface TitleProps {
 function Title({ name }: TitleProps) {
     return (
         <div className="p-2">
-            <strong className="dark-grey-text">
-                {name.toUpperCase()}
-            </strong>
+            <Link to="/todo">
+                <strong className="dark-grey-text">
+                    {name.toUpperCase()}
+                </strong>
+            </Link>
         </div>
     );
 }

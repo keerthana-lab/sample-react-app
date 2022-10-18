@@ -3,7 +3,7 @@ import AppHeader from "../AppHeader";
 import { defaultValue, statusOfTask } from "../constants";
 import Status from "../Status";
 
-export const TaskContext = createContext([defaultValue])
+export const TaskContext = createContext([defaultValue]);
 
 export const HomePage = () => {
   const [ticketDetails, setTicketDetails] = useState([defaultValue]);
