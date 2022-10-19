@@ -2,6 +2,9 @@
     color: rgb(73, 73, 73);
 }
 
+.red-text {
+    color: red;
+}
 .grey-bg {
     background-color: rgb(199, 199, 199);
 }
