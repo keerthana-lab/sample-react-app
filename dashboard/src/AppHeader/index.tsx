@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
-import { AppTitle, closeButton, createTicketLabel, defaultValue, newTask, saveButton, statusOfTask } from "../constants";
+import React, { useEffect, useState } from "react";
+import { AppTitle, closeButton, createTicketLabel, newTask, saveButton, statusOfTask } from "../constants";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { TicketType } from "../Status/types";
-
+import { useForm } from 'react-hook-form';
 
 const tickets: TicketType[] = [];
 
@@ -11,50 +11,28 @@ interface AppHeaderProps {
     getTicketDetails: (ticket: TicketType[]) => void;
 }
 
-function AppHeader({ getTicketDetails }: AppHeaderProps) {
+export function AppHeader({ getTicketDetails }: AppHeaderProps) {
+    const { register, handleSubmit, formState, formState: { errors }, reset } = useForm<TicketType>();
     const [show, setShow] = useState(false);
-    const [formInputs, setFormInputs] = useState(defaultValue);
-    const [showError, setShowError] = useState({
-        taskName: false,
-        taskDesc: false
-    });
-    const nameInput = useRef<HTMLInputElement>(null);
-    const descInput = useRef<HTMLTextAreaElement>(null);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        setFormInputs(prevState => ({ ...prevState, [name]: value }));
-        setShowError(prevState => ({ ...prevState, [name]: false }));
+    const onSubmit = (data) => {
+        handleClose();
+        tickets.push({ ...data });
+        getTicketDetails(tickets);
     }
 
-    const displayError = () => {
-        if (!formInputs.taskName && !formInputs.taskDesc) {
-            setShowError({ "taskName": true, "taskDesc": true });
-            nameInput.current?.focus();
-        } else if (!formInputs.taskDesc) {
-            setShowError(prevState => ({ ...prevState, "taskDesc": true }));
-            descInput.current?.focus();
-        } else {
-            setShowError(prevState => ({ ...prevState, "taskName": true }));
-            nameInput.current?.focus();
+    useEffect(() => {
+        if (formState.isSubmitSuccessful) {
+            reset({
+                taskName: "",
+                taskDesc: "",
+                taskStatus: ""
+            })
         }
-    }
+    });
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (formInputs.taskName && formInputs.taskDesc) {
-            setShow(false);
-            tickets.push({ ...formInputs });
-            getTicketDetails(tickets);
-            setFormInputs(defaultValue);
-        } else {
-            displayError();
-        }
-    }
     return (
         <div className="d-flex justify-content-between align-items-center m-3">
             <h1>{AppTitle}</h1>
@@ -64,15 +42,15 @@ function AppHeader({ getTicketDetails }: AppHeaderProps) {
                     <Modal.Title>{newTask}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <label className="d-flex mb-3">
                             <div className="w-50">Enter Task Name
                                 <span className="red-text">*</span>
                             </div>
                             <div className="w-50">
-                                <input type="text" className="form-control" name="taskName" value={formInputs.taskName} onChange={handleChange} ref={nameInput} />
+                                <input type="text" className="form-control" {...register("taskName", { required: { value: true, message: "Name cannot be empty." } })} />
                                 {
-                                    showError.taskName ? <span className="red-text">Field cannot be empty.</span> : null
+                                    errors.taskName && <DisplayErrorMessage message={errors.taskName.message} />
                                 }
                             </div>
                         </label>
@@ -81,9 +59,9 @@ function AppHeader({ getTicketDetails }: AppHeaderProps) {
                                 <span className="red-text">*</span>
                             </div>
                             <div className="w-50">
-                                <textarea name="taskDesc" className="form-control" value={formInputs.taskDesc} onChange={handleChange} ref={descInput} />
+                                <textarea className="form-control" {...register("taskDesc", { required: { value: true, message: "Description cannot be empty." } })} />
                                 {
-                                    showError.taskDesc ? <span className="red-text">Field cannot be empty.</span> : null
+                                    errors.taskDesc && <DisplayErrorMessage message={errors.taskDesc.message} />
                                 }
                             </div>
                         </label>
@@ -91,13 +69,19 @@ function AppHeader({ getTicketDetails }: AppHeaderProps) {
                             <div className="w-50">Enter Task Status
                                 <span className="red-text">*</span>
                             </div>
-                            <select name="taskStatus" className="w-50 form-control" value={formInputs.taskStatus} onChange={handleChange}>
+                            <div className="w-50">
+                                <select className="form-control" {...register("taskStatus", { required: { value: true, message: "Select the status of task." } })}>
+                                    <option value="">Select</option>
+                                    {
+                                        statusOfTask.map((status) => (
+                                            <option key={status} value={status}>{status}</option>
+                                        ))
+                                    }
+                                </select>
                                 {
-                                    statusOfTask.map((status) => (
-                                        <option key={status} value={status}>{status}</option>
-                                    ))
+                                    errors.taskStatus && <DisplayErrorMessage message={errors.taskStatus.message} />
                                 }
-                            </select>
+                            </div>
                         </label>
                     </form>
                 </Modal.Body>
@@ -105,7 +89,7 @@ function AppHeader({ getTicketDetails }: AppHeaderProps) {
                     <Button variant="secondary" onClick={handleClose}>
                         {closeButton}
                     </Button>
-                    <Button variant="primary" onClick={handleSubmit}>
+                    <Button variant="primary" onClick={handleSubmit(onSubmit)}>
                         {saveButton}
                     </Button>
                 </Modal.Footer>
@@ -114,4 +98,12 @@ function AppHeader({ getTicketDetails }: AppHeaderProps) {
     );
 }
 
-export default AppHeader;
+interface DisplayErrorMessageProps {
+    message: string | undefined;
+}
+
+function DisplayErrorMessage({ message }: DisplayErrorMessageProps) {
+    return(
+        <span className="red-text">{message}</span>
+    );
+}

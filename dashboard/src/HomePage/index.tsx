@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import AppHeader from "../AppHeader";
+import { AppHeader } from "../AppHeader";
 import { defaultValue, statusOfTask } from "../constants";
 import Status from "../Status";
 

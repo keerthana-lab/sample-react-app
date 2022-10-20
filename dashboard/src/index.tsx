@@ -6,7 +6,7 @@ import { HomePage } from './HomePage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import "./index.css";
-import "./App.css"
+import "./style.css"
 import { ToDo } from './pages/ToDo';
 
 function App() {
