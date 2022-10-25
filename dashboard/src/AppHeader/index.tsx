@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { AppTitle, closeButton, createTicketLabel, newTask, saveButton, statusOfTask } from "../constants";
+import { AppTitle, createTicketLabel, newTask, statusOfTask } from "../constants";
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import { TicketType } from "../Status/types";
+import { ModalComponent } from "../components/Modal";
 import { useForm } from 'react-hook-form';
 
 const tickets: TicketType[] = [];
@@ -37,12 +37,9 @@ export function AppHeader({ getTicketDetails }: AppHeaderProps) {
         <div className="d-flex justify-content-between align-items-center m-3">
             <h1>{AppTitle}</h1>
             <Button variant="outline-primary" onClick={handleShow}>{createTicketLabel}</Button>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{newTask}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+            {
+                show && (<ModalComponent title={newTask} handleClose={handleClose} handleSave={handleSubmit(onSubmit)}>
+                     <form onSubmit={handleSubmit(onSubmit)}>
                         <label className="d-flex mb-3">
                             <div className="w-50">Enter Task Name
                                 <span className="red-text">*</span>
@@ -84,16 +81,8 @@ export function AppHeader({ getTicketDetails }: AppHeaderProps) {
                             </div>
                         </label>
                     </form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        {closeButton}
-                    </Button>
-                    <Button variant="primary" onClick={handleSubmit(onSubmit)}>
-                        {saveButton}
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                </ModalComponent>)
+            }
         </div>
     );
 }
