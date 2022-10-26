@@ -8,12 +8,12 @@ interface StatusProps {
 }
 
 function Status({ status }: StatusProps) {
-    const ticketDetails = useContext(TaskContext);
+    const { ticketDetails } = useContext(TaskContext);
     return (
         <div className="grey-bg rounded status-card p-2">
             <Title name={status} />
             {
-                 ticketDetails.map((t) => (
+                 ticketDetails?.map((t) => (
                     t.taskName && t.taskDesc && t.taskStatus === status &&
                     <Ticket ticket={t} key={t.taskName} /> 
                 ))

@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TicketType } from "./types";
-import { editButton } from "../constants";
+import { deleteButton } from "../constants";
+import { TaskContext } from "../HomePage";
 
 interface TicketProps {
     ticket: TicketType;
 }
 
 function Ticket({ ticket }: TicketProps) {
+    const { handleDelete } = useContext(TaskContext);
+
     return (
         <div className="light-blue-bg border border-secondary rounded p-2 mb-3">
             <div className="d-flex mb-2">
@@ -18,7 +21,7 @@ function Ticket({ ticket }: TicketProps) {
                 {ticket.taskDesc}
             </div>
             <div className="d-flex justify-content-end">
-            <button type="button" className="btn btn-outline-dark">{editButton}</button>
+                <button type="button" className="btn btn-outline-dark" onClick={() => handleDelete && handleDelete(ticket.taskName)}>{deleteButton}</button>
             </div>
         </div>
     );

@@ -5,6 +5,7 @@ export const newTask = "Create New Task";
 export const closeButton = "Close";
 export const saveButton = "Save";
 export const editButton = "Edit";
+export const deleteButton = "Delete";
 export const defaultValue = {
     taskName: "",
     taskDesc: "",

@@ -5,10 +5,8 @@ import { TicketType } from "../Status/types";
 import { ModalComponent } from "../components/Modal";
 import { useForm } from 'react-hook-form';
 
-const tickets: TicketType[] = [];
-
 interface AppHeaderProps {
-    getTicketDetails: (ticket: TicketType[]) => void;
+    getTicketDetails: (ticket: TicketType) => void;
 }
 
 export function AppHeader({ getTicketDetails }: AppHeaderProps) {
@@ -19,8 +17,7 @@ export function AppHeader({ getTicketDetails }: AppHeaderProps) {
 
     const onSubmit = (data) => {
         handleClose();
-        tickets.push({ ...data });
-        getTicketDetails(tickets);
+        getTicketDetails(data);
     }
 
     useEffect(() => {
