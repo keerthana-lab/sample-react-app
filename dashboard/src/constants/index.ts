@@ -12,3 +12,4 @@ export const defaultValue = {
   taskDesc: "",
   taskStatus: "To Do"
 };
+export const confirmation = "Confirmation";

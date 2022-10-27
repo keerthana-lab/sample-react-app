@@ -1,20 +1,21 @@
 import React, { ReactNode } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/esm/Modal";
-import { closeButton, saveButton } from "../constants";
+import { closeButton, confirmation, saveButton } from "../constants";
 
 interface ModalComponentProps {
-    title: string;
+    title?: string;
     handleClose: () => void;
     handleSave: () => void;
     children: ReactNode;
+    buttonText?: string;
 }
 
-export function ModalComponent({ title, handleClose, handleSave, children }: ModalComponentProps) {
+export function ModalComponent({ title, handleClose, handleSave, children, buttonText }: ModalComponentProps) {
     return (
         <Modal show={true} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>{title}</Modal.Title>
+                <Modal.Title>{title ?? confirmation}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {children}
@@ -24,7 +25,7 @@ export function ModalComponent({ title, handleClose, handleSave, children }: Mod
                     {closeButton}
                 </Button>
                 <Button variant="primary" onClick={handleSave}>
-                    {saveButton}
+                    {buttonText ?? saveButton}
                 </Button>
             </Modal.Footer>
         </Modal>
