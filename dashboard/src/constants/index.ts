@@ -7,7 +7,8 @@ export const saveButton = "Save";
 export const editButton = "Edit";
 export const deleteButton = "Delete";
 export const defaultValue = {
-    taskName: "",
-    taskDesc: "",
-    taskStatus: "To Do"
-  };
+  taskId: 0,
+  taskName: "",
+  taskDesc: "",
+  taskStatus: "To Do"
+};

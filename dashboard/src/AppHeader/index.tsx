@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AppTitle, createTicketLabel, newTask, statusOfTask } from "../constants";
 import Button from 'react-bootstrap/Button';
-import { TicketType } from "../Status/types";
+import { FormInputs, TicketType } from "../constants/types";
 import { ModalComponent } from "../components/Modal";
 import { useForm } from 'react-hook-form';
 
@@ -10,14 +10,16 @@ interface AppHeaderProps {
 }
 
 export function AppHeader({ getTicketDetails }: AppHeaderProps) {
-    const { register, handleSubmit, formState, formState: { errors }, reset } = useForm<TicketType>();
+    const { register, handleSubmit, formState, formState: { errors }, reset } = useForm<FormInputs>();
+    const [id, setId] = useState(1);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const onSubmit = (data) => {
         handleClose();
-        getTicketDetails(data);
+        getTicketDetails({...data, "taskId": id});
+        setId(id+1);
     }
 
     useEffect(() => {
@@ -90,6 +92,6 @@ interface DisplayErrorMessageProps {
 
 function DisplayErrorMessage({ message }: DisplayErrorMessageProps) {
     return(
-        <span className="red-text">{message}</span>
+        <span className="red-text small-text">{message}</span>
     );
 }
