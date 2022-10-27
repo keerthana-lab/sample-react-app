@@ -10,10 +10,13 @@ interface AppHeaderProps {
 }
 
 export function AppHeader({ getTicketDetails }: AppHeaderProps) {
-    const { register, handleSubmit, formState, formState: { errors }, reset } = useForm<FormInputs>();
+    const { register, handleSubmit, formState, formState: { errors }, reset, clearErrors } = useForm<FormInputs>();
     const [id, setId] = useState(1);
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+        clearErrors();
+    };
     const handleShow = () => setShow(true);
 
     const onSubmit = (data) => {
