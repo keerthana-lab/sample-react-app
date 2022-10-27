@@ -14,8 +14,8 @@ function Status({ status }: StatusProps) {
             <Title name={status} />
             {
                  ticketDetails?.map((t) => (
-                    t.taskName && t.taskDesc && t.taskStatus === status &&
-                    <Ticket ticket={t} key={t.taskName} /> 
+                    t.taskStatus === status &&
+                    <Ticket ticket={t} key={t.taskId} /> 
                 ))
             }
         </div>
