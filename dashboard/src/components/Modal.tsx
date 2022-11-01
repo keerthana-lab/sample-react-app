@@ -1,6 +1,6 @@
-import React, { ReactNode } from "react";
-import Button from "react-bootstrap/esm/Button";
-import Modal from "react-bootstrap/esm/Modal";
+import { ReactNode } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import { closeButton, confirmation, saveButton } from "../constants";
 
 interface ModalComponentProps {

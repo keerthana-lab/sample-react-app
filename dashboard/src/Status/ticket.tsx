@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { TicketType } from "../constants/types";
 import { deleteButton } from "../constants";
 import { TaskContext } from "../HomePage";

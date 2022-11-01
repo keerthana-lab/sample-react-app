@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import { createContext, useReducer } from "react";
 import { AppHeader } from "../AppHeader";
 import { defaultValue, statusOfTask } from "../constants";
 import Status from "../Status";

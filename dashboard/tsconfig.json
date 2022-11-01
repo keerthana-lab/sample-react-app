@@ -1,9 +1,13 @@
 {
     "compilerOptions": {
-      "jsx": "react",
+      "jsx": "react-jsx",
       "outDir": "./built",
       "allowJs": true,
-      "target": "es5"
+      "target": "es5",
+      "types": ["reflect-metadata", "jest"],
+      "typeRoots": ["./types", "./node_modules/@types"],
+      "esModuleInterop": true
     },
-    "include": ["./src/**/*.ts"]
+    "include": ["./src/**/*.tsx", "./src/**/*.ts"],
+    "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", "**/*.test.tsx"]
   }

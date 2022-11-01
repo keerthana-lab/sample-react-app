@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AppTitle, createTicketLabel, newTask, statusOfTask } from "../constants";
 import Button from 'react-bootstrap/Button';
 import { FormInputs, TicketType } from "../constants/types";
@@ -20,7 +20,7 @@ export function AppHeader({ getTicketDetails }: AppHeaderProps) {
     const handleShow = () => setShow(true);
 
     const onSubmit = (data) => {
-        handleClose();
+        setShow(false);
         getTicketDetails({...data, "taskId": id});
         setId(id+1);
     }
@@ -38,7 +38,7 @@ export function AppHeader({ getTicketDetails }: AppHeaderProps) {
     return (
         <div className="d-flex justify-content-between align-items-center m-3">
             <h1>{AppTitle}</h1>
-            <Button variant="outline-primary" onClick={handleShow}>{createTicketLabel}</Button>
+            <Button variant="outline-primary" onClick={handleShow} data-testid="create-ticket-button">{createTicketLabel}</Button>
             {
                 show && (<ModalComponent title={newTask} handleClose={handleClose} handleSave={handleSubmit(onSubmit)}>
                      <form onSubmit={handleSubmit(onSubmit)}>
