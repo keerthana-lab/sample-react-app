@@ -12,10 +12,6 @@ function Ticket({ ticket }: TicketProps) {
     const { handleDelete } = useContext(TaskContext);
     const [show, setShow] = useState(false);
 
-    const onDeleteTask = () => {
-        handleDelete && handleDelete(ticket.taskId);
-    }
-
     return (
         <>
         <div className="light-blue-bg border border-secondary rounded p-2 mb-3">
@@ -32,12 +28,12 @@ function Ticket({ ticket }: TicketProps) {
                 {ticket.taskDesc}
             </div>
             <div className="d-flex justify-content-end">
-                <button type="button" className="btn btn-outline-dark" onClick={() => setShow(true)}>{deleteButton}</button>
+                <button type="button" className="btn btn-outline-dark" onClick={() => setShow(true)} aria-label={`${deleteButton}${ticket.taskId}`}>{deleteButton}</button>
             </div>
         </div>
         {
             show && (
-                <ModalComponent handleClose={() => setShow(false)} handleSave={onDeleteTask} buttonText={deleteButton}>
+                <ModalComponent handleClose={() => setShow(false)} handleSave={() => handleDelete(ticket.taskId)} buttonText={deleteButton}>
                     <div>Are You Sure to delete the Task ?</div>
                 </ModalComponent>
             )

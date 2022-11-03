@@ -12,7 +12,7 @@ function renderHomePage() {
 describe("Home Page", () => {
     test("should render app title", async () => {
         renderHomePage();
-        const appName = (await screen.findByRole("heading")).textContent;
-        expect(appName).toEqual(AppTitle);
+        const appName = (await screen.findByRole("heading"));
+        expect(appName.textContent).toEqual(AppTitle);
     });
 });

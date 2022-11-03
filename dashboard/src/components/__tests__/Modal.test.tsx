@@ -1,24 +1,25 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
-import { describe, test, expect } from '@jest/globals';
+import { describe, test, expect, jest } from '@jest/globals';
 import { ModalComponent } from "../Modal";
 
 function renderModalComponent() {
-    const handleClose = () => console.log("Close Modal");
-    const handleSave = () => console.log("Save data");
+    const handleClose = jest.fn();
+    const handleSave = jest.fn();
     render(<ModalComponent handleClose={handleClose} handleSave={handleSave}><div>Hello World !</div></ModalComponent>);
 }
 
 describe("Re-usable Modal", () => {
     test("should render modal", async () => {
         renderModalComponent();
+        expect(screen.findByRole("dialog")).toBe;
         const defaultTitle = screen.findByText("Confirmation");
         expect(defaultTitle).toBe;
         const bodyText = screen.findByText("Hello World !");
         expect(bodyText).toBe;
-        const button1 = screen.findByText("Close");
-        const button2 = screen.findByText("Save");
-        expect(button1).toBe;
-        expect(button2).toBe;
+        const button1 = await screen.findByRole("button", { name: "primary button"});
+        const button2 = await screen.findByRole("button", { name: "secondary button"});
+        expect(button1.textContent).toEqual("Save");
+        expect(button2.textContent).toEqual("Close");
     });
 });

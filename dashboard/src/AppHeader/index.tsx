@@ -38,7 +38,7 @@ export function AppHeader({ getTicketDetails }: AppHeaderProps) {
     return (
         <div className="d-flex justify-content-between align-items-center m-3">
             <h1>{AppTitle}</h1>
-            <Button variant="outline-primary" onClick={handleShow} data-testid="create-ticket-button">{createTicketLabel}</Button>
+            <Button variant="outline-primary" onClick={handleShow} aria-label="create ticket">{createTicketLabel}</Button>
             {
                 show && (<ModalComponent title={newTask} handleClose={handleClose} handleSave={handleSubmit(onSubmit)}>
                      <form onSubmit={handleSubmit(onSubmit)}>

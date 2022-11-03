@@ -13,7 +13,7 @@ interface ModalComponentProps {
 
 export function ModalComponent({ title, handleClose, handleSave, children, buttonText }: ModalComponentProps) {
     return (
-        <Modal show={true} onHide={handleClose}>
+        <Modal show={true} onHide={handleClose} role="dialog">
             <Modal.Header closeButton>
                 <Modal.Title>{title ?? confirmation}</Modal.Title>
             </Modal.Header>
@@ -21,10 +21,10 @@ export function ModalComponent({ title, handleClose, handleSave, children, butto
                 {children}
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={handleClose} aria-label="secondary button">
                     {closeButton}
                 </Button>
-                <Button variant="primary" onClick={handleSave}>
+                <Button variant="primary" onClick={handleSave} aria-label="primary button">
                     {buttonText ?? saveButton}
                 </Button>
             </Modal.Footer>

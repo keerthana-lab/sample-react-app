@@ -6,11 +6,12 @@ import { TicketType } from "../constants/types";
 
 type contextProviderType = {
   ticketDetails: TicketType[];
-  handleDelete?: (taskId: number) => void;
+  handleDelete: (taskId: number) => void;
 }
 
 const contextDefaultValues: contextProviderType = {
-  ticketDetails: [defaultValue]
+  ticketDetails: [defaultValue],
+  handleDelete: (taskId: number) => { console.log("Deleted Task #" + taskId); }
 }
 
 export const TaskContext = createContext<contextProviderType>(contextDefaultValues);
