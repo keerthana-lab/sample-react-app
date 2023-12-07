@@ -90,7 +90,7 @@ export function AppHeader({ getTicketDetails }: AppHeaderProps) {
 }
 
 interface DisplayErrorMessageProps {
-    message: string | undefined;
+    message: string;
 }
 
 function DisplayErrorMessage({ message }: DisplayErrorMessageProps) {
